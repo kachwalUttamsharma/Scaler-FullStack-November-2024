@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic HTML</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+      }
+      header,
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+      }
+      nav {
+        background-color: #444;
+        color: white;
+        text-align: center;
+        padding: 0.5rem 0;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 1rem;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1rem;
+      }
+      section {
+        flex: 2;
+        padding: 1rem;
+      }
+      aside {
+        flex: 1;
+        background-color: #f4f4f4;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      footer {
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My website</h1>
+      <p>Welcome to the site</p>
+    </header>
+
+    <!-- nav - navigation links -->
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+      <section>
+        <h2>Main Content</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci,
+          velit.
+        </p>
+      </section>
+
+      <aside>
+        <h2>sidebar</h2>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda,
+          voluptatibus.
+        </p>
+      </aside>
+    </main>
+
+    <footer>
+      <p>Copywrites | owner details</p>
+    </footer>
+  </body>
+</html>
