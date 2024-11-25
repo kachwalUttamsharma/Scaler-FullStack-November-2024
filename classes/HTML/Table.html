@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+  </head>
+  <body>
+    <!-- table - tag (acts like a wrapper) -->
+    <table border="1" style="border-collapse: collapse">
+      <!-- rows, col -->
+      <!-- first row - heading of different columns -->
+      <!-- first row - heading - thead -->
+      <!-- all other rows or data - tbody -->
+      <!-- caption - table heading - what this table stands for -->
+      <!-- tr - table row -->
+      <!-- th - table heading -->
+      <!-- td - table data -->
+      <!-- attributes - rowspan | colspan -->
+      <caption>
+        Tracking of Subject to PSP
+      </caption>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>PSP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">1</td>
+          <td rowspan="2">Arvind</td>
+          <td>DSA</td>
+          <td>95%</td>
+        </tr>
+        <tr>
+          <!-- <td>2</td> -->
+          <!-- <td>Arvind</td> -->
+          <td>SQL</td>
+          <td>97%</td>
+        </tr>
+        <tr>
+          <td rowspan="2">2</td>
+          <td rowspan="2">Geetesh</td>
+          <td>DSA</td>
+          <td>90%</td>
+        </tr>
+        <tr>
+          <!-- <td>4</td> -->
+          <!-- <td>Geetesh</td> -->
+          <td>SQL</td>
+          <td>100%</td>
+        </tr>
+        <tr>
+          <td rowspan="2">3</td>
+          <td rowspan="2">Abhijeet</td>
+          <td>DSA</td>
+          <td>98%</td>
+        </tr>
+        <tr>
+          <!-- <td>6</td> -->
+          <!-- <td>Abhijeet</td> -->
+          <td>SQL</td>
+          <td>70%</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total Average PSP</td>
+          <!-- <td></td>
+          <td></td> -->
+          <td>91.67</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>
