@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-size: 16px;
+        line-height: 1.5;
+        color: dodgerblue;
+        background-color: rgb(148, 77, 68);
+      }
+
+      .container {
+        width: 600px;
+        height: 600px;
+        border: 2px solid black;
+        padding: 10px;
+        margin: 10px 5px;
+        display: grid;
+        /* fr - fractional unit */
+        /* 1fr = total width / total no of fr */
+        /* 1fr  = 500px/5 = 100px */
+        /* repeat(no of columns, width of each column) */
+        /* minmax(low, high) */
+        /* grid-template-columns: repeat(3, 4fr); */
+        /* 80px, 1fr = 80-200px */
+        /* no of columns : auto-fill | auto-fit */
+        /* grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); */
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px 100px;
+
+        /*justify-items: along the row you can adjust it
+         using start, end, center*/
+        /* justify-items: center; */
+        /*aling-items: along the column you can adjust it
+         using start, end, center*/
+        /* align-items: center; */
+        /* place-items: center; */
+
+        /* justify-content: center;
+
+        align-content: center; */
+        /* place-content: center; */
+
+        grid-auto-flow: row;
+
+        /* row-gap: 5px;
+        column-gap: 5px; */
+        gap: 5px;
+      }
+
+      .item {
+        background-color: dodgerblue;
+        color: whitesmoke;
+        border: 1px solid lightblue;
+      }
+
+      .item:nth-of-type(1) {
+        justify-self: start;
+        align-self: start;
+        /* start line / end line */
+        /* grid-column: 1 / 4;
+        grid-row: 1 / 2; */
+        /* start line / no of cols|row span */
+        grid-column: 1 / 3 span;
+        grid-row: 1 / 1 span;
+      }
+
+      /* .item:nth-of-type(5) {
+        justify-self: center;
+        align-self: center;
+      }
+
+      .item:nth-of-type(9) {
+        justify-self: end;
+        align-self: end;
+      } */
+
+      .item:nth-of-type(6) {
+        grid-row: 3/ 5;
+        grid-column: 2/4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quam
+        impedit libero voluptates ad hic sit tempore fugiat!
+      </div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut quaerat
+        odit et, fuga dolorem distinctio voluptatum hic maxime voluptatem
+        dolore.
+      </div>
+      <div class="item">7</div>
+      <div class="item">8</div>
+      <div class="item">9</div>
+    </div>
+  </body>
+</html>
