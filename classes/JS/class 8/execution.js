@@ -60,17 +60,57 @@
 // 10, 20, 21, 31, (21, 31 ?) = 31 , (31,10 ?) = 10
 
 // let and const
-let fruits = "apple";
-console.log(fruits); // apple
-{
-  //   console.log(fruits);
-  let fruits;
-  console.log(fruits);
-  fruits = "orange";
-  {
-    console.log(fruits);
-    let fruits;
-  }
-  console.log(fruits);
-}
-console.log(fruits);
+// let fruits = "apple";
+// console.log(fruits); // apple
+// {
+//   //   console.log(fruits);
+//   let fruits;
+//   console.log(fruits);
+//   fruits = "orange";
+//   {
+//     console.log(fruits);
+//     let fruits;
+//   }
+//   console.log(fruits);
+// }
+// console.log(fruits);
+// "use strict";
+var firstName = "Loki";
+let cap = {
+  firstName: "Steve",
+  sayHi: function () {
+    console.log("53", this.firstName); // 53 steve
+    function subInner() {
+      console.log("54", this.firstName); // 54 loki
+      const iAmInner = () => {
+        console.log("55", this.firstName);
+      };
+      iAmInner();
+    }
+    subInner();
+  },
+};
+cap.sayHi();
+
+// const ladder = {
+//   stop: 0,
+//   up() {
+//     this.stop++;
+//     return this;
+//   },
+//   down() {
+//     this.stop--;
+//     return this;
+//   },
+//   showStep: function () {
+//     console.log(this.stop);
+//     return this;
+//   },
+// };
+// ladder.up();
+// ladder.up();
+// ladder.up();
+// ladder.down();
+// ladder.showStep();
+
+// ladder.up().up().up().down().showStep();
