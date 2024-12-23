@@ -22,17 +22,19 @@ Function.prototype.mycall = function (
   objOnWhichReqFnNeedToBeInvoked,
   ...params
 ) {
-  // this -> point to something
-  console.log("this", this); // petersTeam
-  // petermsTeam => requireFn
-  // ironman => {
-  //   requiredFn: pertersTeam,
-  //   name: "Tony Strac",
-  //   team: "Iron Man",
-  // }
-  objOnWhichReqFnNeedToBeInvoked.requiredFn = this;
-  objOnWhichReqFnNeedToBeInvoked.requiredFn(...params);
-  delete objOnWhichReqFnNeedToBeInvoked.requiredFn;
+  if (typeof this !== "function") {
+    throw new Error(this, "is not a function");
+  }
+  if (
+    !objOnWhichReqFnNeedToBeInvoked ||
+    typeof objOnWhichReqFnNeedToBeInvoked !== "object"
+  ) {
+    throw new Error(objOnWhichReqFnNeedToBeInvoked, "is not a object");
+  }
+  const fnSymbol = Symbol(objOnWhichReqFnNeedToBeInvoked.name);
+  objOnWhichReqFnNeedToBeInvoked[fnSymbol] = this;
+  objOnWhichReqFnNeedToBeInvoked[fnSymbol](...params);
+  delete objOnWhichReqFnNeedToBeInvoked[fnSymbol];
 };
 
 // cap.petersTeam.mycall(ironman, "Nayak", "Adil");
@@ -41,15 +43,34 @@ Function.prototype.mycall = function (
 cap.petersTeam.apply(ironman, ["Nayak", "Adil"]);
 
 Function.prototype.myapply = function (objOnWhichReqFnNeedToBeInvoked, params) {
-  objOnWhichReqFnNeedToBeInvoked.requiredFn = this;
-  objOnWhichReqFnNeedToBeInvoked.requiredFn(...params);
-  delete objOnWhichReqFnNeedToBeInvoked.requiredFn;
+  if (typeof this !== "function") {
+    throw new Error(this, "is not a function");
+  }
+  if (
+    !objOnWhichReqFnNeedToBeInvoked ||
+    typeof objOnWhichReqFnNeedToBeInvoked !== "object"
+  ) {
+    throw new Error(objOnWhichReqFnNeedToBeInvoked, "is not a object");
+  }
+  const fnSymbol = Symbol(objOnWhichReqFnNeedToBeInvoked.name);
+  objOnWhichReqFnNeedToBeInvoked[fnSymbol] = this;
+  objOnWhichReqFnNeedToBeInvoked[fnSymbol](...params);
+  delete objOnWhichReqFnNeedToBeInvoked[fnSymbol];
 };
 
 Function.prototype.mybind = function (
   objOnWhichReqFnNeedToBeInvoked,
   ...params
 ) {
+  if (typeof this !== "function") {
+    throw new Error(this, "is not a function");
+  }
+  if (
+    !objOnWhichReqFnNeedToBeInvoked ||
+    typeof objOnWhichReqFnNeedToBeInvoked !== "object"
+  ) {
+    throw new Error(objOnWhichReqFnNeedToBeInvoked, "is not a object");
+  }
   const requredFunc = this;
   return function (...params1) {
     requredFunc.mycall(objOnWhichReqFnNeedToBeInvoked, ...params, ...params1);
@@ -60,24 +81,3 @@ const bindedFunc = cap.petersTeam.mybind(ironman);
 bindedFunc("Nayak", "Adil");
 
 cap.petersTeam.myapply(ironman, ["Nayak", "Adil"]);
-// ------------------------------------------------------------------------
-Function.prototype.mycall = function (
-  objOnWhichReqFnNeedToBeInvoked,
-  ...params
-) {
-  objOnWhichReqFnNeedToBeInvoked.requiredFn = this;
-  objOnWhichReqFnNeedToBeInvoked.requiredFn(...params);
-  delete objOnWhichReqFnNeedToBeInvoked.requiredFn;
-};
-
-Function.prototype.myapply = function (objOnWhichReqFnNeedToBeInvoked, params) {
-  objOnWhichReqFnNeedToBeInvoked.requiredFn = this;
-  objOnWhichReqFnNeedToBeInvoked.requiredFn(...params);
-  delete objOnWhichReqFnNeedToBeInvoked.requiredFn;
-};
-
-Function.prototype.mybind = function (objOnWhichReqFnNeedToBeInvoked) {
-  return (...params1) => {
-    this.mycall(objOnWhichReqFnNeedToBeInvoked, ...params1);
-  };
-};
