@@ -119,29 +119,44 @@
 
 // private variable
 
-function createEventStack() {
-  var items = [];
-  return {
-    push(item) {
-      if (item % 2 == 0) {
-        items.push(item);
-        console.log("is pushed");
-      } else {
-        console.log("please push even number");
-      }
-    },
-    pop() {
-      return items.pop();
-    },
-    getValue() {
-      return JSON.parse(JSON.stringify(items));
-    },
+// function createEventStack() {
+//   var items = [];
+//   return {
+//     push(item) {
+//       if (item % 2 == 0) {
+//         items.push(item);
+//         console.log("is pushed");
+//       } else {
+//         console.log("please push even number");
+//       }
+//     },
+//     pop() {
+//       return items.pop();
+//     },
+//     getValue() {
+//       return JSON.parse(JSON.stringify(items));
+//     },
+//   };
+// }
+
+// const stack = createEventStack();
+// stack.push(10);
+// stack.push(11);
+// stack.push(12);
+// stack.pop();
+// console.log(stack.getValue());
+
+// How to implement a(1)(2)(3) a(1)(4) using only one inner closure function
+
+// a(1)(2)(3) = 6
+function a(param) {
+  let sum = param;
+  return function abc(newParam) {
+    if (newParam == undefined) {
+      return sum;
+    }
+    sum += newParam;
+    return abc;
   };
 }
-
-const stack = createEventStack();
-stack.push(10);
-stack.push(11);
-stack.push(12);
-stack.pop();
-console.log(stack.getValue());
+console.log(a(1)(2)(3)());
