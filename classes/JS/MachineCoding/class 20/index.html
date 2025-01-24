@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>I am h1</h1>
+    <p>I am paragraph</p>
+    <h1>I am h1-1</h1>
+    <p>I am paragraph-1</p>
+
+    <h1 class="thirdH1p">I am h1-1</h1>
+    <p class="thirdH1p">I am paragraph-1</p>
+
+    <h1 id="fourthH1p">I am h1-1</h1>
+    <p id="fourthH1p">I am paragraph-1</p>
+  </body>
+  <script>
+    // const h1 = document.querySelector("h1");
+    // const p = document.querySelector("p");
+    // console.log(h1);
+    // console.log(p);
+
+    // const h1s = document.querySelectorAll("h1");
+    // const ps = document.querySelectorAll("p");
+    // console.log(h1s);
+    // console.log(ps);
+
+    // const h11 = document.querySelectorAll(".thirdH1p");
+    // console.log(h11);
+
+    // const p11 = document.querySelectorAll("#fourthH1p");
+    // console.log(p11);
+
+    // const h1 = document.getElementsByTagName("h1");
+    // console.log(h1);
+
+    // const h11 = document.getElementsByClassName("thirdH1p");
+    // console.log(h11);
+
+    const h111 = document.getElementById("fourthH1p");
+    console.log(h111);
+
+    const p11 = document.querySelectorAll("#fourthH1p");
+    console.log(p11);
+  </script>
+</html>
+
+<!-- // nodelist vs htmlcollection -->
+
+<!-- getElementByTagName, getElementByClassName, getElementByID - HTML Element or HTML Collection -->
+<!-- whereas querySelector or  querySelectorAll return node or nodelist-->
