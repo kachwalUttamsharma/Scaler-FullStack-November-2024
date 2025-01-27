@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        background-color: rgb(133, 200, 185);
+        border: 1 px solid gray;
+        width: 10rem;
+        height: 5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <input type="text" />
+    </div>
+  </body>
+  <script>
+    const divContainer = document.querySelector(".box");
+
+    divContainer.addEventListener("click", () => {
+      console.log("div container got clicked from click events");
+    });
+
+    // divContainer.addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("div container got clicked");
+    //   },
+    //   { once: true }
+    // );
+
+    // divContainer.onclick = () => {
+    //   console.log("div container got clicked");
+    // };
+
+    // mouse and keyword
+
+    // mouse
+
+    // hover
+    // click
+    // mouseup
+    // mousedown
+    // dblclick
+
+    divContainer.addEventListener("dblclick", () => {
+      console.log("div container got clicked from dblclick events");
+    });
+
+    divContainer.addEventListener("mouseup", () => {
+      console.log("div container got clicked from mouseup events");
+    });
+
+    divContainer.addEventListener("mousedown", () => {
+      console.log("div container got clicked from mousedown events");
+    });
+    divContainer.addEventListener("mouseover", () => {
+      console.log("div container got clicked from mouseover events");
+    });
+    divContainer.addEventListener("mouseenter", () => {
+      console.log("div container got clicked from mouseenter events");
+    });
+    divContainer.addEventListener("mouseleave", () => {
+      console.log("div container got clicked from mouseleave events");
+    });
+
+    // keyboard
+    // keypress keydown and keyup
+    const ip = document.querySelector("input");
+    ip.addEventListener("keyup", (e) => {
+      console.log("keyup event");
+      console.log(e);
+    });
+    ip.addEventListener("keydown", (e) => {
+      console.log("keydown event");
+      console.log(e);
+    });
+  </script>
+</html>

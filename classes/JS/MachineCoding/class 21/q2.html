@@ -1,0 +1,53 @@
+<!-- Q - Use a single event handler(only one element should have event handler attached with it) and do the following:
+On clicking of the color name change the background color of the div.container to the same.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Delegation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .container {
+        border: 1px solid;
+        height: 15rem;
+        width: 15rem;
+        margin-left: 50%;
+        margin-top: 25%;
+      }
+
+      .red,
+      .blue,
+      .green {
+        border: 1px solid black;
+        margin: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="red">red</div>
+      <div class="blue">blue</div>
+      <div class="green">green</div>
+    </div>
+    <script>
+      // event bubbling
+      const container = document.querySelector(".container");
+      container.addEventListener(
+        "click",
+        (e) => {
+          const color = e.target.textContent;
+          e.currentTarget.style.backgroundColor = color;
+        },
+        true
+      );
+    </script>
+  </body>
+</html>

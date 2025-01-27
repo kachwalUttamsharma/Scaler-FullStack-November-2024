@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment</title>
+  </head>
+  <body>
+    <h1>List Items</h1>
+    <ul id="listContainer"></ul>
+    <!-- // add li tags in list container with content (order of li tag) -->
+  </body>
+  <script>
+    const ul = document.querySelector("ul");
+
+    // const arr = [];
+    // for (let i = 1; i <= 1000; i++) {
+    //   const newLi = document.createElement("li");
+    //   newLi.innerText = `I am list item ${i}`;
+    //   arr.push(newLi);
+    // }
+    // ul.append(...arr);
+
+    const fragment = document.createDocumentFragment();
+    for (let i = 1; i <= 1000; i++) {
+      const newLi = document.createElement("li");
+      newLi.innerText = `I am list item ${i}`;
+      fragment.appendChild(newLi);
+    }
+    ul.append(fragment);
+  </script>
+</html>
