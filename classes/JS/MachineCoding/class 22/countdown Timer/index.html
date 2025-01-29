@@ -1,0 +1,70 @@
+<!-- 
+    Requirements
+     
+    Must have features:
+    1. what is the maximum time (24 hours)
+    2. Format - HH MM SS
+    3. Pause, Reset, Start, Continue
+    4. Inputs: validations (numbers)
+        1. length of each input should be max 2
+        2. 00-99 (61 seconds -> 1 min + , 1 second) 
+        (65 mins -> 1 hr +, 5 mins)
+        (28hrs -> handle edge case (throw error))
+
+    Good to have features:
+    1. once timer start add music
+    2. give me segment button
+    
+    Approach:
+    3 input events for 3 input types
+    error handling for hours handler
+    3 event listners for 3 buttons 
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Count Down Timer</h1>
+      <div class="timer__label">
+        <div class="timer__label--hrs">Hours</div>
+        <div class="timer__label--mins">Minutes</div>
+        <div class="timer__label--secs">Seconds</div>
+      </div>
+      <div class="timer__inputs">
+        <input type="number" maxlength="2" id="hr" placeholder="00" />
+        <span>:</span>
+        <input
+          type="number"
+          maxlength="2"
+          oninput="this.value=this.value.slice(0,this.maxLength)"
+          id="min"
+          placeholder="00"
+        />
+        <span>:</span>
+        <input
+          type="number"
+          maxlength="2"
+          oninput="this.value=this.value.slice(0,this.maxLength)"
+          id="sec"
+          placeholder="00"
+        />
+      </div>
+      <div class="container__btns">
+        <button class="btn start" id="start">Start</button>
+        <button class="btn pause" id="pause">Pause</button>
+        <button class="btn continue" id="continue">Continue</button>
+        <button class="btn reset" id="reset">Reset</button>
+      </div>
+    </div>
+  </body>
+  <script src="./index.js"></script>
+</html>
