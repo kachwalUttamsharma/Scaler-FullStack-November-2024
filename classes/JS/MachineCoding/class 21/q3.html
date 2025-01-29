@@ -55,22 +55,40 @@ Consider the following HTML structure: -->
 
       <div class="cart">
         <h3>Cart Items</h3>
-        <p>Product 1 : 0</p>
-        <p>Product 2 : 0</p>
-        <p>Product 3 : 0</p>
-        <hr />
-        <p>Total Cart Value: 0</p>
+        <div id="cart-items"></div>
+        <p id="total-price"><strong>Total: $0</strong></p>
       </div>
-    </div>
-    <script>
-      const container = document.querySelector("#productList");
-      container.addEventListener("click", (e) => {
-        const product = e.target.parentNode;
-        const result = `${product.querySelector("h3").innerText} worth of ${
-          product.querySelector("p").innerText
-        } has been added into cart`;
-        console.log(result);
-      });
-    </script>
+  </div>
+  <script>
+    const container = document.querySelector('#productList');
+    const cartItems = document.querySelector('#cart-items');
+    const totalPriceTag = document.querySelector('#total-price');
+    let cartPrice = 0;
+
+    container.addEventListener('click', (event) => {
+
+        if(!event.target.classList.contains('add-to-cart')) return;
+
+        const productDiv = event.target.parentElement;
+        const productName = productDiv.querySelector('h3').innerText;
+        
+        //Get Price Value
+        /* 
+        const priceText = productDiv.querySelector('p').innerText.split(" ")[1].trim();
+        const priceVal = parseFloat(priceText.substring(1, priceText.length));
+        */
+
+        const priceText = productDiv.querySelector('p').innerText;
+        const priceVal = parseFloat(priceText.replace(/[^\d.]/g, ''));
+        cartPrice += priceVal;
+
+        //Add Product to Cart
+        const item = document.createElement('h3');
+        item.innerText = `${productName}: $${priceVal}`;
+        cartItems.appendChild(item);
+        
+        totalPriceTag.innerHTML = `<strong>Total: $${cartPrice}</strong>`
+    });
+  </script>
   </body>
 </html>
