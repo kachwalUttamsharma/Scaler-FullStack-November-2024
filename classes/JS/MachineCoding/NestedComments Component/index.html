@@ -97,7 +97,7 @@
       if (e.target.getAttribute("class") === "btn") {
         // const elem = e.target.parentNode.parentNode;
         const elem = e.target.closest(".comment");
-        const inputVal = document.querySelector(".input").value;
+        const inputVal = e.target.previousElementSibling.value;
         elem.appendChild(createAddReply(inputVal));
         e.target.parentNode.remove();
       }
