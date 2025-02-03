@@ -1,0 +1,26 @@
+.heading {
+  text-align: center;
+}
+
+.table {
+  margin: 0 auto;
+}
+
+.box {
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 2rem;
+}
+.white {
+  background-color: rgb(253, 253, 253);
+}
+
+.black {
+  background-color: rgb(228, 136, 136);
+}
+
+.yellow {
+  background-color: rgb(224, 224, 140);
+}
