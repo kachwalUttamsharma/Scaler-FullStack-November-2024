@@ -116,7 +116,7 @@ function addProductToCart({ productJSON, container }) {
 
         const outOfOrder = OUT_OF_ORDER ?
             `<button class="btn-cart out-of-order">Out of Order</button>` :
-            `<button class="btn-cart addCart" data-cart="${isAddedToCart ? OUT_OF_ORDER : !OUT_OF_ORDER}">${isAddedToCart ? "Added to cart" : "Add to cart"}</button>`;
+            `<button class="btn-cart addCart" data-cart="${isAddedToCart ? OUT_OF_ORDER : !OUT_OF_ORDER}">${isAddedToCart ? "Remove from cart" : "Add to cart"}</button>`;
         return `<div class="cart-item" data-product="${key}">
                 <div class="item-images">
                     <img src="${MAIN}" class="img-fluid" alt="${TITLE}">
@@ -214,7 +214,7 @@ function navigator() {
                         "QUALITY": itemQuantity
                     }
                 };
-                addCart.textContent = "Added to cart";
+                addCart.textContent = "Remove from cart";
                 addCart.dataset.cart = false;
             } else {
                 outputJSON["TOTAL_PRODUCTS"] = outputJSON["TOTAL_PRODUCTS"] - 1;
@@ -223,6 +223,7 @@ function navigator() {
                 addCart.dataset.cart = true;
             }
 
+            addProductToCart({ productJSON, container: cart });
             renderCartSections({ outputJSON });
         }
     })

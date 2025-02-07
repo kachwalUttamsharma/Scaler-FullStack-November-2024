@@ -282,16 +282,23 @@ main>section {
   padding: 10px;
   background: #314452;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 
 .d-flex {
   display: flex;
 }
 
-.item-description {}
+.item-description {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
 .item-description .d-flex {
   gap: 10px;
+  margin-top: auto;
 }
 
 .item-title {
@@ -322,7 +329,12 @@ main>section {
   border-radius: 4px;
   cursor: pointer;
 }
-
+.btn-cart[data-cart="false"]{
+    background: #db0000;
+}
+.btn-cart[data-cart="false"]+select{
+  display:none;
+}
 .out-of-order {
   opacity: 0.54;
   cursor: auto;
