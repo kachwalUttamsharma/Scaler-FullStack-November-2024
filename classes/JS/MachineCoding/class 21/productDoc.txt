@@ -1,0 +1,27 @@
+// All the products that we have
+Product JSON {
+    "ID":{
+        "IMAGES":{
+            "MAIN":"PATH",
+            "THUMBNAILS":["PATH","PATH","PATH","PATH","PATH","PATH","PATH","PATH"]
+        },
+        "TITLE":"product title information",
+        "DESCRIPTION":"product description",
+        "PRICE":100,
+        "MAX_QUANTITY":10, // The maximum number of items user can have at a time
+        "OUT_OF_ORDER":true || false, // If it's true, the product can not be order
+        "NOT_AVAILABLE":true || false, // If it's true, the product will not display to the site
+    }
+}
+// This JSON will be send as the output what user have been selected
+Output JSON {
+    "SELECTED_PRODUCTS":{
+        "ID":{ // ID is same as in the product JSON
+            "PRODUCT_ID":"ID",
+            "PRICE":100,
+            "QUANTITY": 10, // Number of the items that are selected the 
+        }
+    },
+    "TOTAL_PRODUCTS":10,
+    "TOTAL_PRICE":100,
+}
