@@ -5,9 +5,50 @@ const proritySetModal = document.querySelector(".priority-color-cont");
 const prorityColorArray = document.querySelectorAll(".priority-color");
 const mainContainer = document.querySelector(".main_cont");
 const textArea = document.querySelector(".textarea-cont");
+const toolBoxProrityContainer = document.querySelector(
+  ".toolbox-priority-cont"
+);
 let currentColor = "green";
 let deleteFlag = false;
 const uid = new ShortUniqueId();
+const colors = ["pink", "blue", "purple", "green"];
+const allTickets = [];
+
+window.addEventListener("load", () => {
+  const getAllTickets = JSON.parse(localStorage.getItem("todoTasks"));
+
+  for (let i = 0; i < getAllTickets.length; i++) {
+    let ticketObj = getAllTickets[i];
+    createTicket(ticketObj.content, ticketObj.color, ticketObj.id);
+  }
+});
+
+toolBoxProrityContainer.addEventListener("click", (e) => {
+  if (e.target === e.currentTarget) {
+    return;
+  }
+  const currentFilterColor = e.target.classList[1];
+  const ticketList = document.querySelectorAll(".ticket-cont");
+  for (let i = 0; i < ticketList.length; i++) {
+    const ticketColorElem = ticketList[i].querySelector(".ticket-color");
+    const ticketColor = ticketColorElem.classList[1];
+    if (ticketColor !== currentFilterColor) {
+      ticketList[i].style.display = "none";
+    } else {
+      ticketList[i].style.display = "block";
+    }
+  }
+});
+
+toolBoxProrityContainer.addEventListener("dblclick", (e) => {
+  if (e.target == e.currentTarget) {
+    return;
+  }
+  const ticketList = document.querySelectorAll(".ticket-cont");
+  for (let i = 0; i < ticketList.length; i++) {
+    ticketList[i].style.display = "block";
+  }
+});
 
 addBtn.addEventListener("click", () => {
   modal.style.display = "flex";
@@ -21,8 +62,8 @@ deleteBtn.addEventListener("click", () => {
   deleteFlag = !deleteFlag;
 });
 
-function createTicket(content, currentColor) {
-  const id = uid();
+function createTicket(content, currentColor, ticketId) {
+  const id = ticketId || uid();
   const ticketContainer = document.createElement("div");
   ticketContainer.setAttribute("class", "ticket-cont");
   ticketContainer.innerHTML = `<div class="ticket-color ${currentColor}"></div>
@@ -32,14 +73,47 @@ function createTicket(content, currentColor) {
     <i class="fa-solid fa-lock"></i>
   </div>`;
   mainContainer.appendChild(ticketContainer);
-  deleteTask(ticketContainer, id);
+  ticketTaskController(ticketContainer, id);
+  const ticketObj = {
+    id: id,
+    content: content,
+    color: currentColor,
+  };
+  allTickets.push(ticketObj);
+  updateLocalStorage();
 }
 
-function deleteTask(ticketContainer, id) {
+function ticketTaskController(ticketContainer, id) {
+  const ticketTextArea = ticketContainer.querySelector(".ticket-area");
   ticketContainer.addEventListener("click", (e) => {
     if (deleteFlag) {
       ticketContainer.remove();
+    } else if (e.target.classList.contains("fa-lock")) {
+      ticketTextArea.setAttribute("contenteditable", "true");
+      const lockElem = e.target;
+      lockElem.classList.remove("fa-lock");
+      lockElem.classList.add("fa-lock-open");
+    } else if (e.target.classList.contains("fa-lock-open")) {
+      ticketTextArea.setAttribute("contenteditable", "false");
+      const lockElem = e.target;
+      lockElem.classList.remove("fa-lock-open");
+      lockElem.classList.add("fa-lock");
+      const ticketObj = allTickets.find((ticket) => {
+        return ticket.id === id;
+      });
+      ticketObj.content = ticketTextArea.textContent;
+    } else if (e.target.classList.contains("ticket-color")) {
+      const color = e.target.classList[1];
+      const idx = colors.indexOf(color);
+      const nextIdx = (idx + 1) % colors.length;
+      e.target.classList.remove(color);
+      e.target.classList.add(colors[nextIdx]);
+      const ticketObj = allTickets.find((ticket) => {
+        return ticket.id === id;
+      });
+      ticketObj.color = colors[nextIdx];
     }
+    updateLocalStorage();
   });
 }
 
@@ -71,3 +145,7 @@ proritySetModal.addEventListener("click", (e) => {
   }
   e.target.classList.add("active");
 });
+
+function updateLocalStorage() {
+  localStorage.setItem("todoTasks", JSON.stringify(allTickets));
+}
