@@ -28,6 +28,7 @@ li {
   height: 5rem;
   background-color: black;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -35,7 +36,6 @@ li {
   height: 60%;
   width: 18rem;
   background-color: #393c3f;
-  margin-left: 5rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -67,7 +67,7 @@ li {
   height: 60%;
   width: 10rem;
   background-color: var(--light);
-  margin-left: 5rem;
+
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -93,6 +93,7 @@ li {
   background-color: var(--ticketBackgroundColor);
   border-radius: 8px;
   position: relative;
+  cursor: grab;
 }
 
 .ticket-color {
@@ -159,4 +160,50 @@ li {
 
 .active {
   border: 0.6rem solid var(--light);
+}
+
+.heading_cont {
+  display: flex;
+  text-align: center;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.task_heading--pending {
+  width: 70%;
+}
+
+.task_heading--finished {
+  width: 30%;
+}
+
+.container_wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.pending-cont {
+  border-right: 3px solid black;
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.finished-cont {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 30%;
+}
+
+.toolbox_header {
+  color: antiquewhite;
+  background-color: rgb(103, 85, 73);
+  width: 10rem;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
 }
