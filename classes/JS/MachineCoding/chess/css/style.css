@@ -2,8 +2,7 @@ body {
   margin: 0;
   background-image: url(../images/chess-board-background.webp);
   background-size: cover;
-  background-color: #383838;
-  overflow: hidden;
+  background-color: #383838; 
   font-family: Arial;
 }
 
@@ -33,7 +32,7 @@ body {
   /* flex-direction: column; */
   /* align-items: center; */
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
   height: 100vh;
   width: 100%;
 }
