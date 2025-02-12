@@ -12,13 +12,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="toolbox_cont">
+    <header class="toolbox_cont">
       <div class="toolbox-priority-cont">
         <div class="color pink"></div>
         <div class="color blue"></div>
         <div class="color purple"></div>
         <div class="color green"></div>
       </div>
+      <h1 class="toolbox_header">To Do List</h1>
       <div class="action-btn-cont">
         <div class="add-btn">
           <i class="fa-solid fa-plus"></i>
@@ -27,21 +28,20 @@
           <i class="fa-solid fa-trash"></i>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="main_cont">
-      <!-- <div class="ticket-cont">
-        <div class="ticket-color green"></div>
-        <div class="ticket-id">#12u434k3</div>
-        <div class="ticket-area">Some Task Info</div>
-        <div class="lock-unlock">
-          <i class="fa-solid fa-lock"></i>
-        </div>
+    <main class="main_cont">
+      <div class="heading_cont">
+        <h2 class="task_heading--pending">Pending</h2>
+        <h2 class="task_heading--finished">Finished</h2>
       </div>
-     -->
-    </div>
+      <div class="container_wrapper">
+        <div class="pending-cont container"></div>
+        <div class="finished-cont container"></div>
+      </div>
+    </main>
 
-    <div class="modal_cont">
+    <dialog class="modal_cont">
       <textarea class="textarea-cont" placeholder="Enter Your Task"></textarea>
       <div class="priority-color-cont">
         <div class="priority-color pink"></div>
@@ -49,7 +49,7 @@
         <div class="priority-color green active"></div>
         <div class="priority-color purple"></div>
       </div>
-    </div>
+    </dialog>
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/short-unique-id@4.4.4/dist/short-unique-id.min.js"

@@ -8,18 +8,26 @@ const textArea = document.querySelector(".textarea-cont");
 const toolBoxProrityContainer = document.querySelector(
   ".toolbox-priority-cont"
 );
+const pendingContainer = document.querySelector(".pending-cont");
+const finishedContainer = document.querySelector(".finished-cont");
+const container = document.querySelectorAll(".container");
 let currentColor = "green";
 let deleteFlag = false;
 const uid = new ShortUniqueId();
 const colors = ["pink", "blue", "purple", "green"];
-const allTickets = [];
+let allTickets = [];
 
 window.addEventListener("load", () => {
   const getAllTickets = JSON.parse(localStorage.getItem("todoTasks"));
 
   for (let i = 0; i < getAllTickets.length; i++) {
     let ticketObj = getAllTickets[i];
-    createTicket(ticketObj.content, ticketObj.color, ticketObj.id);
+    createTicket(
+      ticketObj.content,
+      ticketObj.color,
+      ticketObj.id,
+      ticketObj.isPending
+    );
   }
 });
 
@@ -62,22 +70,29 @@ deleteBtn.addEventListener("click", () => {
   deleteFlag = !deleteFlag;
 });
 
-function createTicket(content, currentColor, ticketId) {
+function createTicket(content, currentColor, ticketId, isPending = true) {
   const id = ticketId || uid();
   const ticketContainer = document.createElement("div");
   ticketContainer.setAttribute("class", "ticket-cont");
+  ticketContainer.setAttribute("draggable", true);
   ticketContainer.innerHTML = `<div class="ticket-color ${currentColor}"></div>
   <div class="ticket-id">${id}</div>
   <div class="ticket-area">${content}</div>
   <div class="lock-unlock">
     <i class="fa-solid fa-lock"></i>
   </div>`;
-  mainContainer.appendChild(ticketContainer);
+  if (isPending) {
+    pendingContainer.appendChild(ticketContainer);
+  } else {
+    finishedContainer.appendChild(ticketContainer);
+  }
+
   ticketTaskController(ticketContainer, id);
   const ticketObj = {
     id: id,
     content: content,
     color: currentColor,
+    isPending: isPending,
   };
   allTickets.push(ticketObj);
   updateLocalStorage();
@@ -88,6 +103,9 @@ function ticketTaskController(ticketContainer, id) {
   ticketContainer.addEventListener("click", (e) => {
     if (deleteFlag) {
       ticketContainer.remove();
+      allTickets = allTickets.filter((ticketObj) => {
+        return ticketObj.id != id;
+      });
     } else if (e.target.classList.contains("fa-lock")) {
       ticketTextArea.setAttribute("contenteditable", "true");
       const lockElem = e.target;
@@ -149,3 +167,29 @@ proritySetModal.addEventListener("click", (e) => {
 function updateLocalStorage() {
   localStorage.setItem("todoTasks", JSON.stringify(allTickets));
 }
+
+let draggedElement = null;
+container.forEach((container) => {
+  container.addEventListener("dragstart", (event) => {
+    console.log(event.target);
+    if (event.target.classList.contains("ticket-cont")) {
+      draggedElement = event.target;
+    }
+  });
+  container.addEventListener("dragover", (event) => {
+    event.preventDefault();
+  });
+  container.addEventListener("drop", (event) => {
+    if (draggedElement) {
+      container.appendChild(draggedElement);
+      const isPendingContainer =
+        container.classList[0] === "pending-cont" ? true : false;
+      const idx = draggedElement.querySelector(".ticket-id").innerText;
+      const ticketObj = allTickets.find((ticket) => {
+        return ticket.id === idx;
+      });
+      ticketObj.isPending = isPendingContainer;
+    }
+    updateLocalStorage();
+  });
+});

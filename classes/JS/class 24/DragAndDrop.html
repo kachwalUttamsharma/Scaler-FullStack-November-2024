@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag and Drop</title>
+    <style>
+      .main_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        border: 1px solid gray;
+        width: 200px;
+        min-height: 60px;
+        margin: 10px;
+        padding: 10px;
+      }
+
+      .box,
+      .box1 {
+        height: 30px;
+        padding: 5px;
+        margin: 5px;
+        background-color: whitesmoke;
+        border: 1px solid #ddd;
+        cursor: grab;
+      }
+
+      .container > .box {
+        background-color: lightpink;
+      }
+
+      .container > .box1 {
+        background-color: lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main_container">
+      <h1>Drag and Drop</h1>
+      <div class="container">
+        <div class="box" draggable="true">Box 1</div>
+        <div class="box" draggable="true">Box 2</div>
+      </div>
+      <div class="container">
+        <div class="box1" draggable="true">Box 3</div>
+        <div class="box1" draggable="true">Box 4</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const container = document.querySelectorAll(".container");
+    let draggedElement = null;
+    container.forEach((container) => {
+      container.addEventListener("dragstart", (event) => {
+        console.log("dragStart : ", event);
+        draggedElement = event.target;
+      });
+      container.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        console.log("dragover : ", event);
+      });
+      container.addEventListener("drop", (event) => {
+        event.preventDefault();
+        if (draggedElement) {
+          container.appendChild(draggedElement);
+          draggedElement = null;
+        }
+        console.log("drop : ", event);
+      });
+      container.addEventListener("dragend", (event) => {
+        console.log("dragend : ", event);
+      });
+    });
+  </script>
+</html>
