@@ -2,7 +2,7 @@ body {
   margin: 0;
   background-image: url(../images/chess-board-background.webp);
   background-size: cover;
-  background-color: #383838; 
+  background-color: #383838;
   font-family: Arial;
 }
 .color-white {
@@ -20,9 +20,6 @@ body {
   font-size: 18px;
   text-transform: uppercase;
   cursor: pointer;
-}
-
-.btn-white {
 }
 
 .img-fluid {
@@ -143,7 +140,7 @@ body {
   margin: 10px;
 }
 @media (max-width: 756px) {
-  .column { 
+  .column {
     width: 11.1vw;
     height: 11.1vw;
   }
