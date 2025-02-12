@@ -89,7 +89,10 @@ function ChessBoardUI({ boardSize, container, leftBoardContainer, rightBoardCont
     leftBoardContainer.append(leftBoardUI);
     leftBoardContainer.insertAdjacentHTML("beforeend", `<p>PLAYER 1</p>`);
     container.append(boardUI);
-    container.insertAdjacentHTML("beforeend", `<button class="resetGame btn btn-white">Restart Game</botton>`);
+      container.insertAdjacentHTML("beforeend", `
+        <p class="d-none mb-0 color-white playerNameContainer">Now Playing <span class="playerName"></span></p>
+        <button class="resetGame btn btn-white">Restart Game</botton>
+    `);
     container.classList.remove("notActive");
 }
 
