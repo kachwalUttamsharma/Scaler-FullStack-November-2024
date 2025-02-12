@@ -4,6 +4,10 @@ import { boardContainer, leftBoardContainer, rightBoardContainer } from "./Contr
 let selectedPlayer = null;
 let whoIsPlaying=null;
 function whoIsPlayingHandler({ player }) {
+        const playerNameContainer = document.querySelector(".playerNameContainer");
+    const playerName = document.querySelector(".playerName");
+    playerNameContainer.classList.remove(["d-none"]);
+    playerName.textContent = player === "black_team" ? "Player 2" : "Player 1";
     whoIsPlaying = player;
 }
 // This function will update selected player so when move is done right pices can move
