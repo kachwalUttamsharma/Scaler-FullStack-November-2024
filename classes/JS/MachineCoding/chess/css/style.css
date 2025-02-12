@@ -5,7 +5,15 @@ body {
   background-color: #383838; 
   font-family: Arial;
 }
-
+.color-white {
+  color: #fff;
+}
+.d-none {
+  display: none;
+}
+.mb-0 {
+  margin-bottom: 0;
+}
 .btn {
   margin-top: 20px;
   padding: 8px;
