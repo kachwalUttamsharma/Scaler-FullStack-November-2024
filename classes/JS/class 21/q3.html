@@ -25,7 +25,7 @@ Consider the following HTML structure: -->
         }
 
         /* Product List Styling */
-        #product-list {
+        .product-list {
             flex: 1;
         }
 
@@ -108,7 +108,7 @@ Consider the following HTML structure: -->
 
   <body>
     <div class="container">
-      <div id="productList">
+      <div class="product-list">
         <div class="product">
           <h3>Product 1</h3>
           <p>Price: $10</p>
@@ -124,38 +124,38 @@ Consider the following HTML structure: -->
           <p>Price: $30</p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
+      </div>
   
-        <div class="cart">
-          <h3>Cart Items</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody id="cart-body">
-              <!-- Cart Items will be added here -->
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3">
-                  <strong>Grand Total:</strong>
-                </td>
-                <td>
-                  <strong id="total-price">$0</strong>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+      <div class="cart">
+        <h3>Cart Items</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="cart-body">
+            <!-- Cart Items will be added here -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">
+                <strong>Grand Total:</strong>
+              </td>
+              <td>
+                <strong id="total-price">$0</strong>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
     
   <script>
-    const container = document.querySelector('#productList');
+    const container = document.querySelector('.product-list');
     const cartBody = document.querySelector('#cart-body');
     const totalPriceTag = document.querySelector('#total-price');
     let cartPrice = 0;
@@ -208,11 +208,11 @@ Consider the following HTML structure: -->
         //Add Product to Cart
         const row = document.createElement('tr');
         row.innerHTML = `
-        <td>${product}</td>
-        <td>${data.quantity}</td>
-        <td>$${data.price}</td>
-        <td>$${data.totalPrice}</td>
-        `;
+          <td>${product}</td>
+          <td>${data.quantity}</td>
+          <td>$${data.price}</td>
+          <td>$${data.totalPrice}</td>
+          `;
         cartBody.appendChild(row);
       }
 
