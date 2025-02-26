@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Introduction</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- <div id="parent">
+        <div id="child">
+          <h1 id="greeting">Hello From React</h1>
+          <h1 id="greeting1">Hello From React-1</h1>
+        </div>
+      </div> -->
+    </div>
+  </body>
+  <script type="text/babel">
+    const rootElem = document.querySelector("#root");
+    // const headingElem = document.createElement("div");
+    // // headingElem.textContent = "Hello From JS";
+    // headingElem.innerHTML = `<div id="parent">
+    //     <div id="child">
+    //       <h1 id="greeting">Hello From React</h1>
+    //       <h1 id="greeting1">Hello From React-1</h1>
+    //     </div>
+    //   </div>`;
+    // rootElem.appendChild(headingElem);
+
+    // React
+    // const rootElem = document.querySelector("#root");
+
+    // const headingElemn = React.createElement(
+    //   "h1",
+    //   {
+    //     id: "HeadingElement",
+    //     style: { color: "blue" },
+    //   },
+    //   "Hello From React"
+    // );
+    // console.log(headingElemn);
+
+    // const container = React.createElement(
+    //   "div",
+    //   { id: "parent" },
+    //   React.createElement("div", { id: "child" }, [
+    //     React.createElement("h1", { id: "greeting" }, "Hello From React"),
+    //     React.createElement("h1", { id: "greeting1" }, "Hello From React-1"),
+    //   ])
+    // );
+
+    // component - JSX (Javascript XML)
+    // function H1Tag() {
+    //   return <h1>Hello From React JSX</h1>;
+    // }
+
+    function Container({ greeting }) {
+      return (
+        <div id="parent">
+          <div id="child">
+            <h1 id="greeting">{greeting}</h1>
+            <h1 id="greeting1">Hello From React-1</h1>
+          </div>
+        </div>
+      );
+    }
+
+    // props
+    function Ccontainer() {
+      return (
+        <div>
+          <Container greeting="greeting from first child" />
+          <Container greeting="greeting from second child" />
+          <Container greeting="greeting from third child" />
+        </div>
+      );
+    }
+    ReactDOM.render(<Ccontainer />, rootElem);
+  </script>
+</html>
