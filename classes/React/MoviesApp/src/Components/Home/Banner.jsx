@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect } from "react";
 import axios from "axios";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 const Banner = () => {
   const [movies, setMovies] = useState([]);

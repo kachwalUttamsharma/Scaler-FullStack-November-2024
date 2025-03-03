@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 const MovieInfo = ({ handleCloseModal, movie }) => {
   const { id, title, overview, poster_path, release_date, vote_average } =

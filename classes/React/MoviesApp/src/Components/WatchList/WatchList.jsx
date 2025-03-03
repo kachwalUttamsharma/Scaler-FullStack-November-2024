@@ -1,15 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
-import genreids from "../helpers/genreId";
+import genreids from "../../helpers/genreId";
+import MovieRecommendations from "./MovieRecommendations";
+import { MovieContext } from "../../MovieContextWrapper";
 
 const WatchList = () => {
-  const [watchList, setWatchList] = useState([]);
   const [search, setSearch] = useState("");
+  const [genreList, setGenreList] = useState(["All Genre"]);
+  const [currGenre, setCurrGenre] = useState("All Genre");
+  const [showModel, setShowModal] = useState(false);
+  const { watchList, setWatchList, removeFromWatchList } =
+    useContext(MovieContext);
 
   useEffect(() => {
     const watchListData = JSON.parse(localStorage.getItem("watchListedMovies"));
     setWatchList(watchListData);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("watchListedMovies", JSON.stringify(watchList));
+    const genreList = new Set(
+      watchList.map((movie) => genreids[movie.genre_ids[0]])
+    );
+    setGenreList(["All Genre", ...genreList]);
+  }, [watchList]);
 
   const handleAscendingOrderRatings = () => {
     const sortedAscendingData = watchList.sort(
@@ -23,8 +37,33 @@ const WatchList = () => {
     );
     setWatchList([...sortedDescendingData]);
   };
+
   return (
     <div className="my-10 mx-5">
+      <button
+        className="flex justify-center items-center bg-blue-400 hover:bg-blue-500 transition duration-300 h-[3rem] w-[14rem] text-white font-bold border border-blue-700 rounded-xl shadow-md cursor-pointer mx-[43%] my-4"
+        onClick={() => setShowModal((prevState) => !prevState)}
+      >
+        Recommed Movies
+      </button>
+
+      {showModel && <MovieRecommendations setShowModal={setShowModal} />}
+
+      <div className="flex justify-center m-4">
+        {genreList?.map((genre, idx) => {
+          return (
+            <div
+              key={idx}
+              className={`mx-4 flex justify-center items-center h-[3rem] w-[9rem] font-bold border rounded-xl cursor-pointer ${
+                currGenre === genre ? "bg-blue-400 text-white" : "bg-gray-300"
+              }`}
+              onClick={() => setCurrGenre(genre)}
+            >
+              {genre}
+            </div>
+          );
+        })}
+      </div>
       <div className="flex justify-center my-10">
         <input
           placeholder="Search by movie name"
@@ -74,6 +113,12 @@ const WatchList = () => {
           {watchList?.length > 0 &&
             watchList
               .filter((movie) => {
+                return (
+                  currGenre === "All Genre" ||
+                  genreids[movie.genre_ids[0]] === currGenre
+                );
+              })
+              .filter((movie) => {
                 return movie.title
                   .toLowerCase()
                   .trim()
@@ -101,7 +146,12 @@ const WatchList = () => {
                     <td className="pl-6 py-4">
                       <div>{genreids[movie?.genre_ids[0]]}</div>
                     </td>
-                    <td className="pl-6 py-4">Action</td>
+                    <td
+                      className="pl-6 py-4 text-red-600 cursor-pointer "
+                      onClick={() => removeFromWatchList(movie)}
+                    >
+                      Delete
+                    </td>
                   </tr>
                 );
               })}

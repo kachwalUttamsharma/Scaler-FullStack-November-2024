@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Pagination from "./Pagination";
 import axios from "axios";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 import MovieList from "./MovieList";
 import MovieInfo from "./MovieInfo";
+import { MovieContext } from "../../MovieContextWrapper";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loader, setLoader] = useState(false);
   const [pageNo, setPageNo] = useState(1);
-  const [watchList, setWatchList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const { watchList, addToWatchList, removeFromWatchList } =
+    useContext(MovieContext);
 
   const handlePrev = () => {
     setPageNo((prevPage) => {
@@ -25,15 +27,6 @@ const Movies = () => {
   const handleNext = () => {
     setPageNo((prevPage) => prevPage + 1);
   };
-
-  useEffect(() => {
-    const watchListData = JSON.parse(localStorage.getItem("watchListedMovies"));
-    setWatchList(watchListData);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("watchListedMovies", JSON.stringify(watchList));
-  }, [watchList]);
 
   useEffect(() => {
     setLoader(true);
@@ -57,22 +50,6 @@ const Movies = () => {
       }
     }
     return false;
-  };
-
-  const addToWatchList = (movie) => {
-    setWatchList((prevState) => {
-      const updatedWatchList = prevState ? [...prevState, movie] : [movie];
-      return updatedWatchList;
-    });
-  };
-
-  const removeFromWatchList = (movie) => {
-    setWatchList((prevState) => {
-      const filteredWatchList = prevState.filter((m) => {
-        return m?.id != movie?.id;
-      });
-      return filteredWatchList;
-    });
   };
 
   const handleOpenModal = (movie) => {
