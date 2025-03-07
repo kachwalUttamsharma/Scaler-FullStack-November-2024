@@ -9,11 +9,20 @@ import {
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import UserPage from "./pages/UserPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isDarkMode = true;
+
+  const totalItems = useSelector((store) => store.cart.totalQuantity);
+
   return (
     <>
-      <div className="min-h-screen bg-gray-100 text-gray-900">
+      <div
+        className={`min-h-screen transition-colors ${
+          isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
+        }`}
+      >
         <Router>
           <div className="p-4 shadow-md flex justify-between items-center bg-white dark:bg-gray-800">
             <NavLink to="/" className="text-xl font-bold dark:text-white">
@@ -24,7 +33,7 @@ function App() {
                 to="/cart"
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition"
               >
-                View Cart
+                View Cart ({totalItems})
               </NavLink>
               <NavLink
                 to="/user"
