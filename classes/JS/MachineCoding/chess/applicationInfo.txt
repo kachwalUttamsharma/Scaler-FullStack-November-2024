@@ -1,0 +1,47 @@
+// This is the base of the application all the team and piece is in this JSON
+playerInformation = {
+    "white_left_rook": {  
+        team: "white_team", // In what team the piece is
+        isActive: false, // This means piece is not deleted yet
+        pieceName: "rook",
+        imagePath: "./images/white-rook.svg",
+        isMoved: false, // If piece not move it's false or true
+    } 
+}
+// currentLocation: { row: 7, column: 1 }, 
+This function will set all the piece not the board and add currentLocation
+boardPieces={
+    "1-1":{
+        pieceKey:playerInformation["white_left_rook"]
+    }
+}
+// Type of action a piece can take
+pieceMoves={
+    king:["kingHandler"],
+    queen:["leftToRightHandler","topToBottomHandler","topLeftToBottomRightHandler","topRightToBottomLeftHandler"],
+    bishop:["topLeftToBottomRightHandler","topRightToBottomLeftHandler"],
+    knight:["kingHandler"],
+    rook:["leftToRightHandler","topToBottomHandler"],
+    pawn:["pawnHandler"]
+}
+// This could be use if i want to redo last changes
+movmentlogs={
+    "Uniqu id's":{
+        playerInformationKey:"white_left_rook"
+        team:white_team || black_team,
+        from:{
+            row:1,
+            column:1
+        },
+        to:{
+            row:1,
+            column:1
+        }
+    }
+}
+
+
+Sir I have this chess game referring to the last classes
+And I have also pushed the code(Pull request) to the machine coding folder
+https://chessboardui.netlify.app/
+I would love to get you feedback on code
