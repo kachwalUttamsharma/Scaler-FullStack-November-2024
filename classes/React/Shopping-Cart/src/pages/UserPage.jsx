@@ -5,7 +5,7 @@ import { fetchUserThunk } from "../redux/userSlice";
 const UserPage = () => {
   const dispatch = useDispatch();
   const { loading, error, user } = useSelector((state) => state.user);
-  const isDarkMode = true;
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
 
   useEffect(() => {
     dispatch(fetchUserThunk());

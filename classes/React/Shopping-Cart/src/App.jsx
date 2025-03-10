@@ -10,9 +10,10 @@ import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import UserPage from "./pages/UserPage";
 import { useSelector } from "react-redux";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
-  const isDarkMode = true;
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
 
   const totalItems = useSelector((store) => store.cart.totalQuantity);
 
@@ -41,6 +42,7 @@ function App() {
               >
                 User Info
               </NavLink>
+              <ThemeToggle />
             </div>
           </div>
 

@@ -10,11 +10,17 @@ const ProductList = () => {
     loading,
     error,
   } = useSelector((store) => store.products);
+  const cartItems = useSelector((store) => store.cart.cartItems);
 
-  const isDarkMode = true;
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   useEffect(() => {
     dispatch(fetchProductsThunk());
   }, []);
+
+  const getCartQuantity = (productId) => {
+    const cartItem = cartItems.find((item) => item.id === productId);
+    return cartItem ? cartItem.quantity : 0;
+  };
   return (
     <>
       <div
@@ -47,6 +53,11 @@ const ProductList = () => {
                 <p className="text-gray-600 dark:text-gray-300">
                   ${product.price.toFixed(2)}
                 </p>
+                {getCartQuantity(product.id) > 0 && (
+                  <p className="text-sm font-medium text-green-500 mt-1">
+                    In Cart: {getCartQuantity(product.id)}
+                  </p>
+                )}
                 <button
                   onClick={() => dispatch(addToCart(product))}
                   className="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md transition"
