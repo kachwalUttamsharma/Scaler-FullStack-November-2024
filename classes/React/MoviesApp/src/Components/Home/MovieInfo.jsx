@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Spinner from "../Spinner";
 
-const MovieInfo = ({ handleCloseModal, movie }) => {
+const MovieInfo = React.memo(({ handleCloseModal, movie }) => {
   const { id, title, overview, poster_path, release_date, vote_average } =
     movie;
   const [loader, setLoader] = useState(false);
@@ -92,6 +92,6 @@ const MovieInfo = ({ handleCloseModal, movie }) => {
       <></>
     </div>
   );
-};
+});
 
 export default MovieInfo;

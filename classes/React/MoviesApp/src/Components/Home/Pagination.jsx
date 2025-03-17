@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const Pagination = ({ pageNo, handleNext, handlePrev }) => {
+const Pagination = React.memo(({ pageNo, handleNext, handlePrev }) => {
   return (
     <div className="flex justify-center items-center bg-gray-700 text-white p-3 rounded-lg shadow-md mt-4 gap-4">
       <button
@@ -20,6 +20,6 @@ const Pagination = ({ pageNo, handleNext, handlePrev }) => {
       </button>
     </div>
   );
-};
+});
 
 export default Pagination;

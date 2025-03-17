@@ -5,6 +5,7 @@ import Spinner from "../Spinner";
 import MovieList from "./MovieList";
 import MovieInfo from "./MovieInfo";
 import { MovieContext } from "../../MovieContextWrapper";
+import { useCallback } from "react";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -15,18 +16,18 @@ const Movies = () => {
   const { watchList, addToWatchList, removeFromWatchList } =
     useContext(MovieContext);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setPageNo((prevPage) => {
       if (prevPage == 1) {
         return prevPage;
       }
       return prevPage - 1;
     });
-  };
+  }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setPageNo((prevPage) => prevPage + 1);
-  };
+  }, []);
 
   useEffect(() => {
     setLoader(true);
@@ -43,24 +44,27 @@ const Movies = () => {
       });
   }, [pageNo]);
 
-  const checkIfMoviePresent = (movie) => {
-    for (let i = 0; i < watchList?.length; i++) {
-      if (watchList[i].id === movie.id) {
-        return true;
+  const checkIfMoviePresent = useCallback(
+    (movie) => {
+      for (let i = 0; i < watchList?.length; i++) {
+        if (watchList[i].id === movie.id) {
+          return true;
+        }
       }
-    }
-    return false;
-  };
+      return false;
+    },
+    [watchList]
+  );
 
-  const handleOpenModal = (movie) => {
+  const handleOpenModal = useCallback((movie) => {
     setSelectedMovie(movie);
     setOpenModal(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setSelectedMovie(null);
     setOpenModal(false);
-  };
+  }, []);
 
   return (
     <>
