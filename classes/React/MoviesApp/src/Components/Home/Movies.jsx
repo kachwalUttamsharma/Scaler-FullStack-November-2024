@@ -6,16 +6,21 @@ import MovieList from "./MovieList";
 import MovieInfo from "./MovieInfo";
 import { MovieContext } from "../../MovieContextWrapper";
 import { useCallback } from "react";
+import useFetchData from "../../customHooks/useFetchData";
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
-  const [loader, setLoader] = useState(false);
   const [pageNo, setPageNo] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { watchList, addToWatchList, removeFromWatchList } =
     useContext(MovieContext);
-
+  const {
+    data: movies,
+    loading: loader,
+    error,
+  } = useFetchData(
+    `https://api.themoviedb.org/3/trending/movie/day?api_key=0fa9d94b072b5c497f3a9720acb86bc2&language=en-US&page=${pageNo}`
+  );
   const handlePrev = useCallback(() => {
     setPageNo((prevPage) => {
       if (prevPage == 1) {
@@ -28,21 +33,6 @@ const Movies = () => {
   const handleNext = useCallback(() => {
     setPageNo((prevPage) => prevPage + 1);
   }, []);
-
-  useEffect(() => {
-    setLoader(true);
-    const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=0fa9d94b072b5c497f3a9720acb86bc2&language=en-US&page=${pageNo}`;
-    axios
-      .get(url)
-      .then((response) => {
-        const movieData = response?.data?.results;
-        setMovies(movieData);
-        setLoader(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [pageNo]);
 
   const checkIfMoviePresent = useCallback(
     (movie) => {
@@ -66,6 +56,9 @@ const Movies = () => {
     setOpenModal(false);
   }, []);
 
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <>
       {loader ? (
@@ -76,7 +69,7 @@ const Movies = () => {
             Trending Movies
           </div>
           <MovieList
-            movies={movies}
+            movies={movies?.results || []}
             addToWatchList={addToWatchList}
             removeFromWatchList={removeFromWatchList}
             checkIfMoviePresent={checkIfMoviePresent}

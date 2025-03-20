@@ -1,34 +1,29 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import Spinner from "../Spinner";
+import useFetchData from "../../customHooks/useFetchData";
 
 const MovieInfo = React.memo(({ handleCloseModal, movie }) => {
   const { id, title, overview, poster_path, release_date, vote_average } =
     movie;
-  const [loader, setLoader] = useState(false);
-  const [trailerUrl, setTrailerURL] = useState("");
 
-  useEffect(() => {
-    const fetchTrailer = async () => {
-      try {
-        setLoader(true);
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=0fa9d94b072b5c497f3a9720acb86bc2`
-        );
-        const trailer = response?.data.results.find(
-          (video) => video.type === "Trailer" && video.site === "YouTube"
-        );
-        if (trailer) {
-          setTrailerURL(`https://www.youtube.com/embed/${trailer?.key}`);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoader(false);
-      }
-    };
-    fetchTrailer();
-  }, []);
+  const trailerUrl = useMemo(
+    () =>
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=0fa9d94b072b5c497f3a9720acb86bc2`,
+    [id]
+  );
+
+  const { data, loading: loader, error } = useFetchData(trailerUrl);
+
+  const trailer = data?.results?.find(
+    (video) => video.type === "Trailer" && video.site === "YouTube"
+  );
+  const trailerEmbedUrl = trailer
+    ? `https://www.youtube.com/embed/${trailer.key}`
+    : "";
+
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-[35vw] max-h-[90vh]">
       {loader ? (
@@ -66,11 +61,11 @@ const MovieInfo = React.memo(({ handleCloseModal, movie }) => {
               Trailer
             </h3>
             <div className="w-full h-64">
-              {trailerUrl ? (
+              {trailerEmbedUrl ? (
                 <iframe
                   title={`${title} trailer`}
                   className="w-full h-full rounded-lg"
-                  src={trailerUrl}
+                  src={trailerEmbedUrl}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
