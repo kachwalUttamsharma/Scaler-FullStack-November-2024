@@ -10,6 +10,7 @@ const Login = () => {
       const response = await LoginUser(values);
       if (response?.success) {
         message.success(response?.message);
+        localStorage.setItem("tokenForBMS", response?.data);
         navigate("/");
       } else {
         message.warning(response?.message);
