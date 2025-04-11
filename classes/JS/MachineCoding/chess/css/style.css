@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  background-image: url(../images/chess-board-background.webp);
+  background-size: cover;
+  background-color: #383838;
+  font-family: Arial;
+}
+.color-white {
+  color: #fff;
+}
+.d-none {
+  display: none;
+}
+.mb-0 {
+  margin-bottom: 0;
+}
+.btn {
+  margin-top: 20px;
+  padding: 8px;
+  font-size: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.img-fluid {
+  width: auto;
+  height: 75%;
+  /* padding: 3rem; */
+}
+
+.boardContainer.notActive {
+  display: none;
+}
+
+.boardContainer {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: center;
+  margin-top: 20px;
+  height: 100vh;
+  width: 100%;
+}
+
+.sideBoard {
+  display: flex;
+  /* width: 20%; */
+  flex-wrap: wrap;
+}
+
+.sideBoard p {
+  color: #fff;
+  width: 100%;
+  margin-top: 0;
+  padding: 16px;
+  font-weight: bold;
+}
+
+.rightBoard {
+  justify-content: end;
+}
+
+.rightBoard p {
+  text-align: right;
+}
+
+.sideBoard .row {
+  flex-direction: column;
+  height: fit-content;
+}
+
+.sideBoard .row .column {
+  /* width: 100%; */
+}
+
+.mainBoard {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.bg-selected,
+.hasPiecs {
+  cursor: pointer;
+}
+
+.column {
+  border: 1px solid #ccc;
+  width: 4.9vw;
+  height: 4.9vw;
+  /* aspect-ratio: 1; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* max-height: 93px; */
+}
+
+.bg-black {
+  background-color: #000;
+  color: #fff;
+}
+
+.bg-white {
+  background-color: #fff;
+  color: #000;
+}
+
+.bg-selected {
+  background-color: #f00;
+  color: #fff;
+}
+.howWin:not(.active) {
+  display: none;
+}
+.howWin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000000c7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.howWin h1 {
+  font-size: 50px;
+  text-decoration: underline;
+  font-weight: normal;
+  margin: 0;
+}
+.howWin p {
+  font-size: 25px;
+  margin: 10px;
+}
+@media (max-width: 756px) {
+  .column {
+    width: 11.1vw;
+    height: 11.1vw;
+  }
+  .resetGame {
+    margin-bottom: 16px;
+  }
+  .sideBoard p {
+    text-align: center;
+  }
+  .boardContainer section:first-child {
+    order: 3;
+  }
+  .mainBoard {
+    width: 100%;
+  }
+  .boardContainer {
+    width: calc(100% - 32px);
+    margin: auto;
+    color: #fff;
+  }
+  .sideBoard,
+  .boardContainer {
+    flex-direction: column;
+  }
+  .sideBoard .row {
+    flex-direction: row;
+  }
+}
