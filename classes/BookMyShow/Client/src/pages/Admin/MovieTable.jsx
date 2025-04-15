@@ -5,10 +5,13 @@ import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/loaderSlice";
 import { getAllMovies } from "../../api/movie";
 import MovieForm from "./MovieForm";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const MovieTable = () => {
   const [movies, setMovies] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [formType, setFormType] = useState("add");
   const dispatch = useDispatch();
   const tableHeadings = [
     {
@@ -57,6 +60,27 @@ const MovieTable = () => {
         return moment(data.releaseDate).format("MM-DD-YYYY");
       },
     },
+    {
+      title: "Actions",
+      render: (text, data) => {
+        return (
+          <div style={{ display: "flex" }}>
+            <Button
+              onClick={() => {
+                setIsModalOpen(true);
+                setSelectedMovie(data);
+                setFormType("edit");
+              }}
+            >
+              <EditOutlined />
+            </Button>
+            <Button>
+              <DeleteOutlined />
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
 
   const getData = async () => {
@@ -92,7 +116,14 @@ const MovieTable = () => {
       </div>
       <Table columns={tableHeadings} dataSource={movies} />
       {isModalOpen && (
-        <MovieForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <MovieForm
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          FetchMovieData={getData}
+          formType={formType}
+          setSelectedMovie={setSelectedMovie}
+          selectedMovie={selectedMovie}
+        />
       )}
     </div>
   );

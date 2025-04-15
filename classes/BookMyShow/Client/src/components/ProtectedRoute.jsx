@@ -2,14 +2,9 @@ import { Layout, Menu, message } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import React, { useEffect } from "react";
 import {
-  AppstoreOutlined,
-  CalendarOutlined,
   HomeOutlined,
-  LinkOutlined,
   LogoutOutlined,
-  MailOutlined,
   ProfileOutlined,
-  SettingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
