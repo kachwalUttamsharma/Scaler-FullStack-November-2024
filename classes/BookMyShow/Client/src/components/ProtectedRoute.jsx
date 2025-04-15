@@ -61,29 +61,31 @@ const ProtectedRoute = ({ children }) => {
       icon: <HomeOutlined />,
     },
     {
+      key: "roleProfile",
+      label: (
+        <span
+          onClick={() => {
+            if (user.role === "admin") {
+              navigate("/admin", { replace: true });
+            } else if (user.role === "partner") {
+              navigate("/partner", { replace: true });
+            } else {
+              navigate("/profile", { replace: true });
+            }
+          }}
+        >
+          {user?.role === "admin" && "Movie Management"}
+          {user?.role === "partner" && "Theatre Management"}
+          {user?.role === "user" && "My Bookings"}
+        </span>
+      ),
+      icon: <ProfileOutlined />,
+    },
+    {
       key: "profile",
       label: `${user ? user.name : ""}`,
       icon: <UserOutlined />,
       children: [
-        {
-          key: "roleProfile",
-          label: (
-            <span
-              onClick={() => {
-                if (user.role === "admin") {
-                  navigate("/admin", { replace: true });
-                } else if (user.role === "partner") {
-                  navigate("/partner", { replace: true });
-                } else {
-                  navigate("/profile", { replace: true });
-                }
-              }}
-            >
-              My Profile
-            </span>
-          ),
-          icon: <ProfileOutlined />,
-        },
         {
           key: "logout",
           label: (
