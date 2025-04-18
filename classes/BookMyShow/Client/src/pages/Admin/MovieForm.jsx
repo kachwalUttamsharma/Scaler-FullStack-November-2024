@@ -41,6 +41,7 @@ const MovieForm = ({
       message.error(error);
     } finally {
       dispatch(hideLoading());
+      setSelectedMovie(null);
     }
   };
   return (
