@@ -64,17 +64,20 @@ const MovieTable = () => {
       title: "Actions",
       render: (text, data) => {
         return (
-          <div style={{ display: "flex" }}>
+          <div className="d-flex gap-10">
             <Button
               onClick={() => {
                 setIsModalOpen(true);
+                data.releaseDate = moment(data.releaseDate).format(
+                  "YYYY-MM-DD"
+                );
                 setSelectedMovie(data);
                 setFormType("edit");
               }}
             >
               <EditOutlined />
             </Button>
-            <Button>
+            <Button danger>
               <DeleteOutlined />
             </Button>
           </div>
@@ -104,8 +107,8 @@ const MovieTable = () => {
     getData();
   }, []);
   return (
-    <div>
-      <div className="d-flex justify-content-end">
+    <div style={{ borderRadius: "8px", padding: "5px" }}>
+      <div className="d-flex justify-content-end mb-3">
         <Button
           onClick={() => {
             setIsModalOpen(!isModalOpen);

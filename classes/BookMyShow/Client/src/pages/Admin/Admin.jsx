@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import MovieTable from "./MovieTable";
 import TheatreTable from "./TheatreTable";
 import { Tabs } from "antd";
@@ -19,7 +19,11 @@ const Admin = () => {
   return (
     <div style={{ margin: "10px" }}>
       <h1>Admin Dashboard</h1>
-      <Tabs defaultActiveKey="movies" items={tabItems} />
+      <Tabs
+        defaultActiveKey="movies"
+        items={tabItems}
+        style={{ margin: "10px" }}
+      />
     </div>
   );
 };

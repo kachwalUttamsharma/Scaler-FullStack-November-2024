@@ -16,11 +16,6 @@ const MovieForm = ({
 }) => {
   const dispatch = useDispatch();
 
-  if (selectedMovie) {
-    selectedMovie.releaseDate = moment(selectedMovie.releaseDate).format(
-      "YYYY-MM-DD"
-    );
-  }
   const handleCancel = () => {
     setIsModalOpen(false);
   };
