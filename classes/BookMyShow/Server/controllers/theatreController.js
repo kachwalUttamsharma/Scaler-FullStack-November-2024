@@ -54,9 +54,24 @@ const getAllTheatres = async (req, res, next) => {
   }
 };
 
+const getAllTheatresByOwner = async (req, res, next) => {
+  try {
+    const allTheatres = await Theatre.find({ owner: req.body.userId });
+    res.send({
+      success: true,
+      message: "All Theatres Fetched !",
+      data: allTheatres,
+    });
+  } catch (err) {
+    res.status(400);
+    next(err);
+  }
+};
+
 module.exports = {
   addTheatre,
   updateTheatre,
   deleteTheatre,
   getAllTheatres,
+  getAllTheatresByOwner,
 };
