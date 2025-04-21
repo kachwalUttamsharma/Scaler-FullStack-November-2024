@@ -42,6 +42,7 @@ const deleteTheatre = async (req, res, next) => {
 };
 const getAllTheatres = async (req, res, next) => {
   try {
+    // remove password from owner object
     const allTheatres = await Theatre.find().populate("owner");
     res.send({
       success: true,

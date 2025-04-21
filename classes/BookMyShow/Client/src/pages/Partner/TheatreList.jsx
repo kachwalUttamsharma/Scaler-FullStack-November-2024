@@ -6,12 +6,14 @@ import { getAllTheatres } from "../../api/theatre";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import TheatreForm from "./TheatreForm";
 import DeleteTheatreModal from "./DeleteTheatreModal";
+import ShowModal from "./ShowModal";
 
 const TheatreList = () => {
   const dispatch = useDispatch();
   const [theatres, setTheatres] = useState(null);
   const [selectedTheatre, setSelectedTheatre] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isShowModalOpen, setIsShowModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formType, setFormType] = useState("add");
 
@@ -71,7 +73,16 @@ const TheatreList = () => {
             >
               <DeleteOutlined />
             </Button>
-            {data.isActive && <Button>+ Shows</Button>}
+            {data.isActive && (
+              <Button
+                onClick={() => {
+                  setIsShowModalOpen(true);
+                  setSelectedTheatre(data);
+                }}
+              >
+                + Shows
+              </Button>
+            )}
           </div>
         );
       },
@@ -128,6 +139,14 @@ const TheatreList = () => {
           selectedTheatre={selectedTheatre}
           setSelectedTheatre={setSelectedTheatre}
           fetchTheatreData={getData}
+        />
+      )}
+      {isShowModalOpen && (
+        <ShowModal
+          isShowModalOpen={isShowModalOpen}
+          setIsShowModalOpen={setIsShowModalOpen}
+          selectedTheatre={selectedTheatre}
+          setSelectedTheatre={setSelectedTheatre}
         />
       )}
     </div>
