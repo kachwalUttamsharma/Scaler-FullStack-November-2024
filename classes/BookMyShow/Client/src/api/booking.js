@@ -21,3 +21,12 @@ export const bookShow = async (payload) => {
     return err.response;
   }
 };
+
+export const getAllBookings = async () => {
+  try {
+    const response = await axiosInstance.get("/bookings/getAllBookings");
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};

@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "f8a26bf7-a9f9-4e6f-bfce-b62b671b78b1",
+		"name": "BookMyShow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30258682"
+	},
+	"item": [
+		{
+			"name": "RegisterUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Shravan\",\n    \"email\": \"Shravan@gmail.com\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"sheela@gmail.com\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCurrentUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y5M2U4N2YwOWU4YzQwODc4OTc2ZjAiLCJlbWFpbCI6InNoZWVsYUBnbWFpbC5jb20iLCJpYXQiOjE3NDQzODk3MDcsImV4cCI6MTc0NDQ3NjEwN30.may5B8zYFHcqHtuyt-mABy-RSXhmJDWRpb5lrbRD6j4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/users/getCurrentUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"users",
+						"getCurrentUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddMovie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y5M2U4N2YwOWU4YzQwODc4OTc2ZjAiLCJlbWFpbCI6InNoZWVsYUBnbWFpbC5jb20iLCJpYXQiOjE3NDQ2NTE2OTMsImV4cCI6MTc0NDczODA5M30.REYEX1AUSorQf4hJcBmUgZEt89j9CCM8MihgQqIVVDk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"movieName\": \"Jailer\",\n    \"description\": \"RajniKant Movie\",\n    \"duration\": 160,\n    \"genre\": \"Action\",\n    \"language\": \"Tamil\",\n    \"releaseDate\": \"12-06-2022\",\n    \"poster\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwMdDz34a-Fwccx_Ua7LJugoWscv0rwW_x_A&s\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/movies/addMovie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"movies",
+						"addMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMovies",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/movies/getAllMovies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"movies",
+						"getAllMovies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMovie",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"movieId\": \"67fd4774b65f7f8b6eb0f5dc\",\n    \"movieName\": \"Jailer-2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/movies/updateMovie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"movies",
+						"updateMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovie",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/movies/deleteMovie/:67fd4b45e4d6c5c59b81aabb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"movies",
+						"deleteMovie",
+						":67fd4b45e4d6c5c59b81aabb"
+					],
+					"variable": [
+						{
+							"key": "67fd4b45e4d6c5c59b81aabb",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddTheatre",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"PVR Gachibowli\",\n    \"address\": \"Gachibowli, Hyderabad\",\n    \"phone\": 37439237538,\n    \"email\": \"pvrGowlibowli@gmail.com\",\n    \"owner\": \"6802792a32aa2a0a0a7bf260\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/theatres/addTheatre",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"theatres",
+						"addTheatre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTheatres",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/bms/v1/theatres/getAllTheatres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bms",
+						"v1",
+						"theatres",
+						"getAllTheatres"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
