@@ -42,8 +42,8 @@ export const getShowsByTheatre = async (payload) => {
 
 export const getAllTheatresByMovie = async (payload) => {
   try {
-    const response = await axiosInstance.get(
-      "shows/getAllTheatersByMovie",
+    const response = await axiosInstance.post(
+      "shows/getAllTheatresByMovie",
       payload
     );
     return response.data;
@@ -54,7 +54,9 @@ export const getAllTheatresByMovie = async (payload) => {
 
 export const getShowById = async (payload) => {
   try {
-    const response = await axiosInstance.get("shows/getShowById", payload);
+    const response = await axiosInstance.get(
+      `shows/getShowById/${payload.showId}`
+    );
     return response.data;
   } catch (err) {
     return err.message;
