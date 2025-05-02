@@ -114,6 +114,41 @@
         }
       });
 
+      joinGroupBtn.addEventListener("click", () => {
+        const groupName = groupNameInput.value.trim();
+        if (groupName) {
+          activeRoom = groupName;
+          socket.emit("join_group", groupName);
+        } else {
+          alert("Please enter a group name to join.");
+        }
+      });
+
+      leaveGroupBtn.addEventListener("click", () => {
+        if (activeRoom) {
+          socket.emit("leave_group", activeRoom);
+          activeRoom = null;
+          membersList.innerHTML = null;
+          document.getElementsByClassName(".members-list").innerHTML = null;
+          groupMessagesList.innerHTML = null;
+        } else {
+          alert("You are not in any group.");
+        }
+      });
+
+      sendToGroupBtn.addEventListener("click", () => {
+        const groupMessage = groupMessageInput.value.trim();
+        if (groupMessage && activeRoom) {
+          socket.emit("group_message", {
+            roomId: activeRoom,
+            message: groupMessage,
+          });
+          groupMessageInput.value = "";
+        } else {
+          alert("Please join a group and enter a message.");
+        }
+      });
+
       socket.on("update_groups_list", (groups) => {
         groupsList.innerHTML = "";
         groups.forEach((group) => {
@@ -121,6 +156,24 @@
           groupItem.innerText = group;
           groupsList.appendChild(groupItem);
         });
+      });
+
+      socket.on("update_members_list", (members) => {
+        membersList.innerHTML = "";
+        members.forEach((member) => {
+          const memberItem = document.createElement("li");
+          memberItem.innerText = member;
+          membersList.appendChild(memberItem);
+        });
+      });
+
+      socket.on("receive_group_message", (data) => {
+        const receiverDiv = document.createElement("div");
+        receiverDiv.setAttribute("class", "message-receiver");
+        const messageItem = document.createElement("li");
+        messageItem.innerText = `${data.sender}: ${data.message}`;
+        receiverDiv.appendChild(messageItem);
+        groupMessagesList.appendChild(receiverDiv);
       });
     </script>
   </body>

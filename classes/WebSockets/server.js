@@ -32,6 +32,24 @@ io.on("connection", (socket) => {
     console.log(chatRooms);
     io.emit("update_groups_list", Object.keys(chatRooms));
   });
+
+  socket.on("join_group", (roomId) => {
+    console.log(socket.id, "joined the room :", roomId);
+    if (chatRooms[roomId] && !chatRooms[roomId].members?.includes(socket.id)) {
+      chatRooms[roomId].members.push(socket.id);
+      socket.join(roomId);
+    }
+    io.to(roomId).emit("update_members_list", chatRooms[roomId].members);
+    // chat info that group
+  });
+
+  socket.on("group_message", (data) => {
+    console.log("Group message received:", data.message);
+    io.to(data.roomId).emit("receive_group_message", {
+      sender: socket.id,
+      message: data.message,
+    });
+  });
 });
 
 app.get("/", (req, res) => {
