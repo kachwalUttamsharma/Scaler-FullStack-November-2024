@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Games</title>
+  <link rel="shortcut icon" href="./images/chess-favicon.webp" type="image/x-icon">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body> 
+  <!-- King, Queen, Bishop, Knight, Rook, Pawn -->
+  <main class="boardContainer ">
+      <section><div class="leftBoard sideBoard"></div></section>
+      <section class="mainBoard notActive"></section>
+      <section><div class="rightBoard sideBoard"></div></section> 
+  </main>
+  <section class="howWin">
+    <h1>GAME OVER</h1>
+    <p>PLAYER <span class="player"></span> WON</p>
+  </section>
+  <script type="module" src="./js/Controller.js"></script>
+</body>
+
+</html>
