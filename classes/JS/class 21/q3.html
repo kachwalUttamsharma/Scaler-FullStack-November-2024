@@ -11,59 +11,155 @@ Consider the following HTML structure: -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      #productList {
-        display: flex;
-      }
-      .product {
-        border: 2px solid gray;
-        margin: 2rem;
-        padding: 1rem;
-        background-color: salmon;
-      }
+      body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
 
-      .cart {
-        display: flex;
-        flex-direction: column;
-        background-color: salmon;
-        width: 25rem;
-        margin: 2rem;
-      }
+        /* Layout - Side by Side */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
-      .cart h3 {
-        text-align: center;
-      }
+        /* Product List Styling */
+        .product-list {
+            flex: 1;
+        }
+
+        .product {
+            background: #ffffff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+        /* Cart Styling */
+        .cart {
+            flex: 0.5;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            min-width: 300px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        tr:last-child {
+            font-weight: bold;
+        }
+
+        /* Total Price Styling */
+        #total-price {
+            font-size: 18px;
+            color: #d9534f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .cart {
+                width: 100%;
+            }
+        }
     </style>
   </head>
 
   <body>
-    <div id="productList">
-      <div class="product">
-        <h3>Product 1</h3>
-        <p>Price: $10</p>
-        <button class="add-to-cart">Add to Cart</button>
+    <div class="container">
+      <div class="product-list">
+        <div class="product">
+          <h3>Product 1</h3>
+          <p>Price: $10</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Product 2</h3>
+          <p>Price: $20</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Product 3</h3>
+          <p>Price: $30</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
       </div>
-      <div class="product">
-        <h3>Product 2</h3>
-        <p>Price: $20</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product">
-        <h3>Product 3</h3>
-        <p>Price: $30</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-
+  
       <div class="cart">
         <h3>Cart Items</h3>
-        <div id="cart-items"></div>
-        <p id="total-price"><strong>Total: $0</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="cart-body">
+            <!-- Cart Items will be added here -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">
+                <strong>Grand Total:</strong>
+              </td>
+              <td>
+                <strong id="total-price">$0</strong>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
-  </div>
+    </div>
+    
   <script>
-    const container = document.querySelector('#productList');
-    const cartItems = document.querySelector('#cart-items');
+    const container = document.querySelector('.product-list');
+    const cartBody = document.querySelector('#cart-body');
     const totalPriceTag = document.querySelector('#total-price');
     let cartPrice = 0;
+    const cart = {};
 
     container.addEventListener('click', (event) => {
 
@@ -80,15 +176,49 @@ Consider the following HTML structure: -->
 
         const priceText = productDiv.querySelector('p').innerText;
         const priceVal = parseFloat(priceText.replace(/[^\d.]/g, ''));
+
+        //Update Cart data
+        if(cart[productName])
+        {
+          cart[productName].quantity += 1;
+          cart[productName].totalPrice += priceVal;
+          
+        }
+        else
+        {
+          cart[productName] = {
+            quantity : 1,
+            price : priceVal,
+            totalPrice : priceVal
+          };
+        }
+
+        // Update total cart price
         cartPrice += priceVal;
 
-        //Add Product to Cart
-        const item = document.createElement('h3');
-        item.innerText = `${productName}: $${priceVal}`;
-        cartItems.appendChild(item);
-        
-        totalPriceTag.innerHTML = `<strong>Total: $${cartPrice}</strong>`
+        //Update Cart
+        updateCart();
     });
+
+    function updateCart(){
+      cartBody.innerHTML = '';
+
+      for(const [product, data] of Object.entries(cart))
+      {
+        //Add Product to Cart
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${product}</td>
+          <td>${data.quantity}</td>
+          <td>$${data.price}</td>
+          <td>$${data.totalPrice}</td>
+          `;
+        cartBody.appendChild(row);
+      }
+
+      //Set the Total Price
+      totalPriceTag.innerText = `$${cartPrice}`;
+    }
   </script>
   </body>
 </html>
